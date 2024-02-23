@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Empresa_MVC.Models.DataBase
 {
-    public partial class TEmpleado
+    public partial class Empleado
     {
         public int IdNumEmp { get; set; }
         public string Nombre { get; set; } = null!;
@@ -12,6 +12,6 @@ namespace Empresa_MVC.Models.DataBase
         public int Puesto { get; set; }
         public string Estatus { get; set; } = null!;
 
-        public virtual TCatPuesto PuestoNavigation { get; set; } = null!;
+        public virtual CatPuesto PuestoNavigation { get; set; } = null!;
     }
 }

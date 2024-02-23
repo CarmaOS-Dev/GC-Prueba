@@ -16,21 +16,12 @@ namespace Empresa_MVC.Models.DataBase
         {
         }
 
-        public virtual DbSet<TCatPuesto> TCatPuestos { get; set; } = null!;
-        public virtual DbSet<TEmpleado> TEmpleados { get; set; } = null!;
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=vboxserver;Initial Catalog=GCEmpleados;Persist Security Info=True;User ID=sa;Password=a123456.;Encrypt=True;Trust Server Certificate=True");
-            }
-        }
+        public virtual DbSet<CatPuesto> CatPuestos { get; set; } = null!;
+        public virtual DbSet<Empleado> Empleados { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TCatPuesto>(entity =>
+            modelBuilder.Entity<CatPuesto>(entity =>
             {
                 entity.HasKey(e => e.IdPuesto)
                     .HasName("PK_Puesto");
@@ -48,7 +39,7 @@ namespace Empresa_MVC.Models.DataBase
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<TEmpleado>(entity =>
+            modelBuilder.Entity<Empleado>(entity =>
             {
                 entity.HasKey(e => e.IdNumEmp)
                     .HasName("PK_Empleado");
@@ -70,7 +61,7 @@ namespace Empresa_MVC.Models.DataBase
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.PuestoNavigation)
-                    .WithMany(p => p.TEmpleados)
+                    .WithMany(p => p.Empleados)
                     .HasForeignKey(d => d.Puesto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Empleado_Puesto");

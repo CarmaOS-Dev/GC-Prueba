@@ -9,87 +9,87 @@ using Empresa_MVC.Models.DataBase;
 
 namespace Empresa_MVC.Controllers
 {
-    public class TCatPuestosController : Controller
+    public class CatPuestosController : Controller
     {
         private readonly GCEmpleadosContext _context;
 
-        public TCatPuestosController(GCEmpleadosContext context)
+        public CatPuestosController(GCEmpleadosContext context)
         {
             _context = context;
         }
 
-        // GET: TCatPuestos
+        // GET: CatPuestos
         public async Task<IActionResult> Index()
         {
-              return _context.TCatPuestos != null ? 
-                          View(await _context.TCatPuestos.ToListAsync()) :
-                          Problem("Entity set 'GCEmpleadosContext.TCatPuestos'  is null.");
+              return _context.CatPuestos != null ? 
+                          View(await _context.CatPuestos.ToListAsync()) :
+                          Problem("Entity set 'GCEmpleadosContext.CatPuestos'  is null.");
         }
 
-        // GET: TCatPuestos/Details/5
+        // GET: CatPuestos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.TCatPuestos == null)
+            if (id == null || _context.CatPuestos == null)
             {
                 return NotFound();
             }
 
-            var tCatPuesto = await _context.TCatPuestos
+            var catPuesto = await _context.CatPuestos
                 .FirstOrDefaultAsync(m => m.IdPuesto == id);
-            if (tCatPuesto == null)
+            if (catPuesto == null)
             {
                 return NotFound();
             }
 
-            return View(tCatPuesto);
+            return View(catPuesto);
         }
 
-        // GET: TCatPuestos/Create
+        // GET: CatPuestos/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: TCatPuestos/Create
+        // POST: CatPuestos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdPuesto,Puesto,Descripcion")] TCatPuesto tCatPuesto)
+        public async Task<IActionResult> Create([Bind("IdPuesto,Puesto,Descripcion")] CatPuesto catPuesto)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tCatPuesto);
+                _context.Add(catPuesto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(tCatPuesto);
+            return View(catPuesto);
         }
 
-        // GET: TCatPuestos/Edit/5
+        // GET: CatPuestos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.TCatPuestos == null)
+            if (id == null || _context.CatPuestos == null)
             {
                 return NotFound();
             }
 
-            var tCatPuesto = await _context.TCatPuestos.FindAsync(id);
-            if (tCatPuesto == null)
+            var catPuesto = await _context.CatPuestos.FindAsync(id);
+            if (catPuesto == null)
             {
                 return NotFound();
             }
-            return View(tCatPuesto);
+            return View(catPuesto);
         }
 
-        // POST: TCatPuestos/Edit/5
+        // POST: CatPuestos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdPuesto,Puesto,Descripcion")] TCatPuesto tCatPuesto)
+        public async Task<IActionResult> Edit(int id, [Bind("IdPuesto,Puesto,Descripcion")] CatPuesto catPuesto)
         {
-            if (id != tCatPuesto.IdPuesto)
+            if (id != catPuesto.IdPuesto)
             {
                 return NotFound();
             }
@@ -98,12 +98,12 @@ namespace Empresa_MVC.Controllers
             {
                 try
                 {
-                    _context.Update(tCatPuesto);
+                    _context.Update(catPuesto);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TCatPuestoExists(tCatPuesto.IdPuesto))
+                    if (!CatPuestoExists(catPuesto.IdPuesto))
                     {
                         return NotFound();
                     }
@@ -114,49 +114,49 @@ namespace Empresa_MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(tCatPuesto);
+            return View(catPuesto);
         }
 
-        // GET: TCatPuestos/Delete/5
+        // GET: CatPuestos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.TCatPuestos == null)
+            if (id == null || _context.CatPuestos == null)
             {
                 return NotFound();
             }
 
-            var tCatPuesto = await _context.TCatPuestos
+            var catPuesto = await _context.CatPuestos
                 .FirstOrDefaultAsync(m => m.IdPuesto == id);
-            if (tCatPuesto == null)
+            if (catPuesto == null)
             {
                 return NotFound();
             }
 
-            return View(tCatPuesto);
+            return View(catPuesto);
         }
 
-        // POST: TCatPuestos/Delete/5
+        // POST: CatPuestos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.TCatPuestos == null)
+            if (_context.CatPuestos == null)
             {
-                return Problem("Entity set 'GCEmpleadosContext.TCatPuestos'  is null.");
+                return Problem("Entity set 'GCEmpleadosContext.CatPuestos'  is null.");
             }
-            var tCatPuesto = await _context.TCatPuestos.FindAsync(id);
-            if (tCatPuesto != null)
+            var catPuesto = await _context.CatPuestos.FindAsync(id);
+            if (catPuesto != null)
             {
-                _context.TCatPuestos.Remove(tCatPuesto);
+                _context.CatPuestos.Remove(catPuesto);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TCatPuestoExists(int id)
+        private bool CatPuestoExists(int id)
         {
-          return (_context.TCatPuestos?.Any(e => e.IdPuesto == id)).GetValueOrDefault();
+          return (_context.CatPuestos?.Any(e => e.IdPuesto == id)).GetValueOrDefault();
         }
     }
 }
